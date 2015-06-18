@@ -150,5 +150,73 @@
 				<Property Name="HeaderContents" Value="CREATE PROCEDURE sp_setContextInfoAsAppUserId(@AppUserId int)&#xD;&#xA;AS" />
 			</Annotation>
 		</Element>
+		<Element Type="SqlSchema" Name="[Security]">
+			<Relationship Name="Authorizer">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlInlineTableValuedFunction" Name="[Security].[fn_securitypredicate]">
+			<Property Name="IsSchemaBound" Value="True" />
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[int]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varbinary]" />
+				</Entry>
+				<Entry>
+					<References Name="[Security].[fn_securitypredicate].[@AppUserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Columns">
+				<Entry>
+					<Element Type="SqlComputedColumn" Name="[Security].[fn_securitypredicate].[fn_securitypredicate_result]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="FunctionBody">
+				<Entry>
+					<Element Type="SqlScriptFunctionImplementation">
+						<Property Name="BodyScript">
+							<Value><![CDATA[ SELECT 1 AS fn_securitypredicate_result
+    WHERE
+        DATABASE_PRINCIPAL_ID() = DATABASE_PRINCIPAL_ID('dbo')  -- application context
+        AND CONVERT(int, CONVERT(VARBINARY(4), CONTEXT_INFO())) = @AppUserId]]></Value>
+						</Property>
+						<Annotation Type="SysCommentsObjectAnnotation">
+							<Property Name="Length" Value="378" />
+							<Property Name="StartLine" Value="1" />
+							<Property Name="StartColumn" Value="1" />
+							<Property Name="HeaderContents" Value="CREATE FUNCTION Security.fn_securitypredicate(@AppUserId int)&#xD;&#xA;    RETURNS TABLE&#xD;&#xA;    WITH SCHEMABINDING&#xD;&#xA;AS&#xD;&#xA;    RETURN" />
+							<Property Name="FooterContents" Value="; &#xD;&#xA;        -- AppUserId (int) is 4 bytes" />
+						</Annotation>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[Security].[fn_securitypredicate].[@AppUserId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References Name="[Security]" />
+				</Entry>
+			</Relationship>
+		</Element>
 	</Model>
 </DataSchemaModel>

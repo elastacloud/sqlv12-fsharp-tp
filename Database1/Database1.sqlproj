@@ -111,13 +111,19 @@
     <Folder Include="Tables" />
     <Folder Include="Scripts" />
     <Folder Include="Sprocs" />
+    <Folder Include="Schema" />
+    <Folder Include="Functions" />
+    <Folder Include="SecurityPolicy" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Sales.sql" />
     <Build Include="Sprocs\sp_SetContextInfoAsAppUserId.sql" />
+    <Build Include="Schema\Security.sql" />
+    <Build Include="Functions\fn_securitypredicate.sql" />
+    <Build Include="SecurityPolicy\SalesFilter.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\InsertSales.sql" />
-    <None Include="live-deleteme.publish.xml" />
+    <None Include="Database1.publish.xml" />
   </ItemGroup>
 </Project>
