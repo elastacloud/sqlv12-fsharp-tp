@@ -110,11 +110,14 @@
     <Folder Include="Properties" />
     <Folder Include="Tables" />
     <Folder Include="Scripts" />
+    <Folder Include="Sprocs" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="Tables\Sales.sql" />
+    <Build Include="Sprocs\sp_SetContextInfoAsAppUserId.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Scripts\InsertSales.sql" />
+    <None Include="live-deleteme.publish.xml" />
   </ItemGroup>
 </Project>

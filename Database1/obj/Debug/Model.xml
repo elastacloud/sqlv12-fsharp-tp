@@ -110,5 +110,45 @@
 				</Entry>
 			</Relationship>
 		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[sp_setContextInfoAsAppUserId]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[ 
+    SET CONTEXT_INFO @AppUserId;]]></Value>
+			</Property>
+			<Property Name="IsQuotedIdentifierOn" Value="False" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References Name="[dbo].[sp_setContextInfoAsAppUserId].[@AppUserId]" />
+				</Entry>
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[sp_setContextInfoAsAppUserId].[@AppUserId]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="Length" Value="100" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="CREATE PROCEDURE sp_setContextInfoAsAppUserId(@AppUserId int)&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
 	</Model>
 </DataSchemaModel>
